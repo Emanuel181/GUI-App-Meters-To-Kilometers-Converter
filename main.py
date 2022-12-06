@@ -8,12 +8,16 @@ windows.set_dpi()
 
 
 def convert_meters_to_kilometers(*args):
-    try:
-        float(meters.get())
-    except ValueError:
-        meters_show_dynamic.set('Decimal or float numbers are allowed only!')
+
+    if len(meters.get()) == 0:
+        meters_show_dynamic.set('Enter a value')
     else:
-        meters_show_dynamic.set(str(float(meters.get()) * 0.001) + ' Km')
+        try:
+            float(meters.get())
+        except ValueError:
+            meters_show_dynamic.set('Decimal or float numbers are allowed only!')
+        else:
+            meters_show_dynamic.set(str(float(meters.get()) * 0.001) + ' Km')
 
 
 root = tk.Tk()
@@ -23,6 +27,7 @@ root.geometry('600x400')
 
 
 meters = tk.StringVar()
+meters.set('')
 meters_show_dynamic = tk.StringVar(value=' ')
 
 
